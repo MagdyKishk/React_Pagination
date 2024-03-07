@@ -12,7 +12,6 @@ type Props = {
 };
 
 export default function PostsContainer({
-	postPerPage,
 	setPostPerPage,
 	posts,
 	loading,
@@ -21,9 +20,9 @@ export default function PostsContainer({
 }: Props) {
 	const postCountInput = useRef<HTMLInputElement>(null);
 
-	function handlePostCount(e) {
-		e.preventDefault();
-		if (postCountInput.current) setPostPerPage(postCountInput.current.value);
+	function handlePostCount() {
+		if (postCountInput.current)
+		setPostPerPage(+postCountInput.current.value);
 	}
 
 	return (
@@ -32,7 +31,8 @@ export default function PostsContainer({
 				<form
 					className='p-4 flex gap-2'
 					onSubmit={(e) => {
-						handlePostCount(e);
+						e.preventDefault();
+						handlePostCount();
 					}}>
 					<div >Posts</div>
 					<div className='border-2 border-gray-700'>
